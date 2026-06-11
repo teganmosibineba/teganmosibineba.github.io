@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Tegan Jegede</title>
+<meta name="description" content="My research: how reward signal density shapes the cross-seed consistency of RL-trained agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FDFDFB; --ink:#101418; --body:#39434C; --mute:#6E7882;
+  --line:#E7E6E0; --accent:#1F6B64; --warm:#C77E14; --card:#F5F5F1; --red:#C9573F;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--bg);color:var(--body);
+  font-size:18px;line-height:1.75;-webkit-font-smoothing:antialiased}
+::selection{background:var(--warm);color:#fff}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+h1,h2,h3{color:var(--ink);letter-spacing:-.02em;line-height:1.15}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,107,100,.3)}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--warm);outline-offset:3px;border-radius:3px}
+.mono{font-family:'IBM Plex Mono',monospace}
+b{color:var(--ink);font-weight:600}
+nav{position:sticky;top:0;z-index:50;background:rgba(253,253,251,.92);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+nav .brand{font-weight:700;font-size:16px;color:var(--ink);border:none}
+nav ul{display:flex;gap:24px;list-style:none}
+nav ul a{font-size:14.5px;font-weight:500;color:var(--body);border:none}
+nav ul a:hover,nav ul a.here{color:var(--ink);font-weight:600}
+@media(max-width:560px){nav ul{gap:14px}nav ul a{font-size:13px}}
+section{padding:70px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+h2{font-size:28px;font-weight:700;margin-bottom:24px}
+p+p{margin-top:18px}
+.btns{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-size:15px;font-weight:600;padding:13px 24px;border-radius:10px;border:1.5px solid var(--ink);color:var(--ink);transition:.2s}
+.btn.solid{background:var(--ink);color:#fff}
+.btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+.btn:not(.solid):hover{background:var(--ink);color:#fff}
+.quick-links{margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:13px}
+.hero{padding:80px 0 70px}
+.hero .status{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;color:var(--accent);background:rgba(31,107,100,.07);
+  border:1px solid rgba(31,107,100,.2);padding:7px 14px;border-radius:99px;margin-bottom:28px}
+.hero .status::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.hero h1{font-size:clamp(36px,6vw,52px);font-weight:700;margin-bottom:20px}
+.hero .intro{font-size:21px;line-height:1.6;max-width:640px}
+.about-row{display:grid;grid-template-columns:170px 1fr;gap:36px;align-items:start}
+@media(max-width:600px){.about-row{grid-template-columns:1fr}}
+.about-row img{width:170px;height:170px;object-fit:cover;border-radius:16px;border:1px solid var(--line)}
+.now{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 28px}
+.now-h{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.now-h::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.now ul{list-style:none}
+.now li{padding:8px 0 8px 22px;position:relative;font-size:16px}
+.now li::before{content:'\2192';position:absolute;left:0;color:var(--warm)}
+.xp{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.xp:last-of-type{border-bottom:none}
+@media(max-width:560px){.xp{grid-template-columns:1fr;gap:2px}}
+.xp .when{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--warm);padding-top:4px}
+.xp .what b{display:block;font-size:16.5px}
+.xp .what span{font-size:15px;color:var(--body)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--card);
+  border:1px solid var(--line);padding:7px 13px;border-radius:8px;color:var(--body)}
+.chip.hot{border-color:rgba(31,107,100,.4);color:var(--accent);background:rgba(31,107,100,.06)}
+.contact-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px;text-align:center}
+.contact-box p{max-width:520px;margin:0 auto}
+.contact-box .btns{justify-content:center}
+.contact-links{margin-top:24px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:13px}
+.fig{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin:30px 0}
+.fig-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:600px){.fig-cols{grid-template-columns:1fr}}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--mute);margin-top:8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.fig .cap .bad{color:var(--red)}
+.fig .cap .good{color:var(--accent)}
+.fig .note{font-size:14px;color:var(--mute);margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.paper{background:var(--card);border-left:4px solid var(--warm);border-radius:10px;padding:20px 24px;margin-top:26px}
+.paper .v{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--warm);margin-bottom:6px}
+.paper .t{font-weight:600;color:var(--ink);font-size:17px;line-height:1.45}
+.paper .l{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:13px}
+.proj{padding:22px 0;border-bottom:1px solid var(--line)}
+.proj:last-of-type{border-bottom:none}
+.proj h3{font-size:18.5px;font-weight:600;margin-bottom:4px}
+.proj h3 a{color:var(--ink);border:none}
+.proj h3 a:hover{color:var(--accent)}
+.proj p{font-size:16px}
+footer{padding:30px 0 40px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mute);text-align:center}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">Tegan Jegede</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a class="here" href="research.html">Research</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" style="padding-bottom:30px">
+  <div class="wrap">
+    <h1>Research</h1>
+    <p class="intro">One question drives my work: <b>does an RL-trained agent behave consistently
+    enough for its guarantees to mean anything?</b></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The problem</h2>
+    <p>
+      Methods like conformal prediction and calibration promise statistical guarantees on agent
+      behaviour. But they quietly assume the agent <b>behaves consistently across training runs</b>.
+      If two runs of the same system — identical except for the random seed — produce qualitatively
+      different agents, then a guarantee computed on one run says little about the other.
+    </p>
+
+    <h2 style="margin-top:50px">The finding</h2>
+    <p>
+      I trained the same multimodal agent (LLaVA-1.5-7B, LoRA, REINFORCE) on the same ScienceQA data
+      with three random seeds, under two reward designs. With <b>sparse binary reward</b>, one seed
+      produced a healthy agent and another collapsed into degenerate token repetition — the cross-seed
+      confidence interval extends outside the possible range [0, 1]. With a <b>continuous semantic
+      reward</b> (cosine similarity between sentence embeddings of the output and the reference), all
+      three seeds converged: <b>6.8× less variance</b> under otherwise identical conditions.
+    </p>
+
+    <div class="fig">
+      <div class="fig-cols">
+        <div>
+          <svg viewBox="0 0 440 170" role="img" aria-label="Sparse binary reward: seed trajectories diverge, one collapses">
+            <line x1="16" y1="150" x2="434" y2="150" stroke="#D8D7D0" stroke-width="1"/>
+            <line x1="16" y1="10" x2="16" y2="150" stroke="#D8D7D0" stroke-width="1"/>
+            <path fill="none" stroke="#1F6B64" stroke-width="2.2" stroke-linecap="round" d="M16,120 C66,118 86,100 126,98 S206,80 256,72 S376,55 434,50"/>
+            <path fill="none" stroke="#C77E14" stroke-width="2.2" stroke-linecap="round" d="M16,122 C56,120 96,115 146,110 S246,108 306,100 S386,92 434,95"/>
+            <path fill="none" stroke="#C9573F" stroke-width="2.2" stroke-linecap="round" d="M16,121 C66,118 106,105 156,100 S226,110 266,125 S356,145 434,148"/>
+            <text x="366" y="140" font-family="IBM Plex Mono" font-size="10" fill="#C9573F">seed 123 ↓</text>
+          </svg>
+          <p class="cap"><span>Sparse binary reward</span><span class="bad">σ = 0.129</span></p>
+        </div>
+        <div>
+          <svg viewBox="0 0 440 170" role="img" aria-label="Continuous reward: all three seeds converge">
+            <line x1="16" y1="150" x2="434" y2="150" stroke="#D8D7D0" stroke-width="1"/>
+            <line x1="16" y1="10" x2="16" y2="150" stroke="#D8D7D0" stroke-width="1"/>
+            <path d="M126,92 C216,76 326,62 434,58 L434,76 C326,80 216,92 126,104 Z" fill="rgba(31,107,100,.08)"/>
+            <path fill="none" stroke="#1F6B64" stroke-width="2.2" stroke-linecap="round" d="M16,120 C66,116 96,102 146,95 S276,74 346,68 S414,62 434,61"/>
+            <path fill="none" stroke="#C77E14" stroke-width="2.2" stroke-linecap="round" d="M16,122 C66,119 106,106 156,99 S286,78 356,72 S416,67 434,66"/>
+            <path fill="none" stroke="#1F6B64" stroke-opacity=".45" stroke-width="2.2" stroke-linecap="round" d="M16,121 C66,117 101,104 151,98 S281,80 351,73 S415,70 434,70"/>
+          </svg>
+          <p class="cap"><span>Continuous semantic reward (mine)</span><span class="good">σ = 0.019 · 6.8× tighter</span></p>
+        </div>
+      </div>
+      <p class="note">
+        Same model, data, and budget — seeds {42, 123, 7}. Binary reward gives zero gradient on ~85%
+        of training steps, so the outcome depends on luck. Continuous feedback keeps every step informative.
+        I call the failure mode <b>reward density collapse</b>.
+      </p>
+    </div>
+
+    <div class="paper">
+      <p class="v">ACCEPTED · ICML 2026 AgenticUQ Workshop · Sole author</p>
+      <p class="t">Sparse Binary Reward Degrades Agent Uncertainty Quantification in Multi-Seed Evaluation</p>
+      <p class="l"><a href="https://github.com/teganmosibineba/Mscproject" target="_blank" rel="noopener">Code & results →</a></p>
+    </div>
+
+    <h2 style="margin-top:50px">What I want to study next</h2>
+    <p>
+      <b>Scaling the evaluation</b> to 8–10 seeds and more model–benchmark pairs, to confirm or refute
+      the reward density collapse hypothesis. <b>Deceptive compliance</b> — connecting my blindspot
+      evaluations to reward design: when does a reward teach an agent to <em>look</em> correct rather
+      than <em>be</em> correct? And <b>representation-level grounding</b> — factuality signals that read
+      from a model's internals, not only its outputs.
+    </p>
+    <p>
+      If this overlaps with your group's interests, I'd genuinely like to hear from you —
+      <a href="mailto:tegan.jegede@yahoo.com">tegan.jegede@yahoo.com</a>.
+    </p>
+  </div>
+</section>
+<footer>© 2026 Tegan Jegede</footer>
+</body>
+</html>
